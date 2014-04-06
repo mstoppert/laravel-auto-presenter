@@ -20,7 +20,7 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
 
         // every time a view is rendered, fire a new event
         View::composer('*', function($view) {
-            if ($view instanceOf \Illuminate\View\View) {
+            if ($view instanceOf \Illuminate\View\View && !str_contains($view->getName(), 'edit')) {
                 Event::fire('content.rendering', array($view));
             }
         });
